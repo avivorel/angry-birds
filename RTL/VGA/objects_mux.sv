@@ -16,7 +16,7 @@ module	objects_mux	(
 					input		logic	[7:0] smileyRGB, 
 					     
 		  // add the box here 
-					input    logic boxDrawingRequest, // box of numbers
+					input    logic boxDrawingRequest, // box of numbers **TEST
 					input		logic	[7:0] boxRGB,
 		  
 		  

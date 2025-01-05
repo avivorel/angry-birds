@@ -64,10 +64,17 @@ begin
 		blueBits <= 2'b11;//LIGHT_COLOR;
 		boardersDrawReq <= 	1'b0 ; 
 		
-		if (        ((pixelX <= bracketOffset) && (pixelX >=(bracketOffset- bracketOffset/4))) ||
+		if (      	/*
+						((pixelX <= bracketOffset) && (pixelX >=(bracketOffset- bracketOffset/4))) ||
 						((pixelY <= bracketOffset) && (pixelY >= (bracketOffset- bracketOffset/4))) ||
 						((pixelX >= (xFrameSize-bracketOffset))&&(pixelX <= (xFrameSize-(bracketOffset- bracketOffset/4)))) || 
-						((pixelY >= (yFrameSize-bracketOffset))&&(pixelY <= (yFrameSize-(bracketOffset- bracketOffset/4))))) 
+						((pixelY >= (yFrameSize-bracketOffset))&&(pixelY <= (yFrameSize-(bracketOffset- bracketOffset/4))))
+						*/
+						/*((pixelX <= bracketOffset) && (pixelX >=(bracketOffset- bracketOffset/4))) ||*/
+						((pixelY <= bracketOffset/4) && (pixelY >= 0)) ||
+						/*((pixelX >= (xFrameSize-bracketOffset))&&(pixelX <= (xFrameSize-(bracketOffset- bracketOffset/4)))) ||*/ 
+						((pixelY >= (yFrameSize-(2*bracketOffset)))&&(pixelY <= (yFrameSize-((2*bracketOffset)- bracketOffset/4))))
+						) 
 			begin 
 					redBits <= LIGHT_COLOR ;	
 					greenBits <= DARK_COLOR  ;	
@@ -76,7 +83,7 @@ begin
 					//boardersDrawReq <= 	1'b1 ; // pulse if drawing the boarders 
 			end
 	
-				
+/*				
 
 	// 4. draw a matrix of 16*16 rectangles with all the colors, each rectsangle 8*8 pixels  	
    // ---------------------------------------------------------------------------------------
@@ -91,7 +98,7 @@ begin
 	
 				
 		 end 
-		
+*/		
 
 		
 	//BG_RGB <=  {redBits , greenBits , blueBits} ; //collect color nibbles to an 8 bit word 

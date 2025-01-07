@@ -18,9 +18,7 @@ module	objects_mux	(
 		  // add the box here 
 					input    logic boxDrawingRequest, // box of numbers **TEST
 					input		logic	[7:0] boxRGB,
-		  //add slingshot
-		  			input    logic slingshotDrawingRequest, // box of numbers **TEST
-					input		logic	[7:0] slingshotRGB,
+		  
 		  
 		  
 		  ////////////////////////
@@ -52,14 +50,8 @@ begin
 
  		else if (HartDrawingRequest == 1'b1)
 				RGBOut <= hartRGB;
-				
-		else if (HartDrawingRequest == 1'b1)
-				RGBOut <= hartRGB;
-				
-				
-		else if (slingshotDrawingRequest == 1'b1)
-				RGBOut <= slingshotRGB;
-		
+		else if (BGDrawingRequest == 1'b1)
+				RGBOut <= backGroundRGB ;
 		else RGBOut <= RGB_MIF ;// last priority 
 		end ; 
 	end

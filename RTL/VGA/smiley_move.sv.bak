@@ -13,7 +13,7 @@ module	smiley_move	(
 					input	 logic resetN,
 					input	 logic startOfFrame,      //short pulse every start of frame 30Hz 
 					// input	 logic enable_sof,    // if want to stop the smiley move
-					input	 logic Y_direction_key,   //move Y Up    
+					input	 logic Y_direction_key,   //move Y Up   
 					input	 logic toggle_x_key,      //toggle X   
 					input  logic collision,         //collision if smiley hits an object
 					input  logic [3:0] HitEdgeCode, //one bit per edge
@@ -204,7 +204,7 @@ begin : fsm_sync_proc
 				// accelerate 
 			
 				if (Yspeed < MAX_Y_SPEED ) //  limit the speed while going down 
-   				Yspeed <= Yspeed + Y_ACCEL ; // deAccelerate : slow the speed down every clock tick 
+   				Yspeed <= Yspeed - Y_ACCEL ; // deAccelerate : slow the speed down every clock tick 
 	
 //				if ((Yspeed < MAX_Y_speed)&&(Yspeed >0 ))	
 //					Yspeed <= Yspeed - Y_ACCEL ; // deAccelerate : slow the speed down every clock tick 

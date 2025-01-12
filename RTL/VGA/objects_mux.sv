@@ -21,7 +21,7 @@ module	objects_mux	(
 		  //add slingshot
 		  			input    logic slingshotDrawingRequest, // box of numbers **TEST
 					input		logic	[7:0] slingshotRGB,
-		  
+
 		  
 		  ////////////////////////
 		  // background 
@@ -30,7 +30,12 @@ module	objects_mux	(
 					input		logic	[7:0] backGroundRGB, 
 					input		logic	BGDrawingRequest, 
 					input		logic	[7:0] RGB_MIF, 
-			  
+			  //add wood
+		
+					input    logic woodDrawingRequest, // box of numbers **TEST
+					input		logic	[7:0] woodRGB,
+		  
+		  
 				   output	logic	[7:0] RGBOut
 );
 
@@ -47,6 +52,8 @@ begin
 		 // add logic for box here 
 		 
 //--------------------------------------------------------------------------------------------		
+		else if (woodDrawingRequest == 1'b1 )
+			RGBOut <= woodRGB;
 		else if (boxDrawingRequest == 1'b1 )
 			RGBOut <= boxRGB;
 

@@ -37,11 +37,7 @@ module	objects_mux	(
 					
 					input    logic pigDrawingRequest, // box of numbers **TEST
 					input		logic	[7:0] pigRGB,
-					
-					input    logic levelDrawingRequest, // box of numbers **TEST
-					input		logic	[7:0] levelRGB,
-					input    logic pig_checkDrawingRequest, // box of numbers **TEST
-					input		logic	[7:0] pigCheckRGB,
+		  
 		  
 				   output	logic	[7:0] RGBOut
 );
@@ -65,16 +61,16 @@ begin
 			RGBOut <= woodRGB;
 		else if (boxDrawingRequest == 1'b1 )
 			RGBOut <= boxRGB;
-		else if (pig_checkDrawingRequest == 1'b1 )
-			RGBOut <= pigCheckRGB;
+
  		else if (HartDrawingRequest == 1'b1)
 				RGBOut <= hartRGB;
 				
 		else if (HartDrawingRequest == 1'b1)
 				RGBOut <= hartRGB;
 				
-		else if (levelDrawingRequest == 1'b1)
-				RGBOut <= levelRGB;
+				
+		else if (slingshotDrawingRequest == 1'b1)
+				RGBOut <= slingshotRGB;
 		
 		else RGBOut <= RGB_MIF ;// last priority 
 		end ; 

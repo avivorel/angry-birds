@@ -21,9 +21,9 @@ agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 280 416)
+	(rect 16 16 272 352)
 	(text "objects_mux" (rect 5 0 55 12)(font "Arial" ))
-	(text "inst" (rect 8 384 20 396)(font "Arial" ))
+	(text "inst" (rect 8 320 20 332)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -144,41 +144,13 @@ agreement for further details.
 		(line (pt 0 288)(pt 16 288)(line_width 3))
 	)
 	(port
-		(pt 0 304)
-		(input)
-		(text "levelDrawingRequest" (rect 0 0 83 12)(font "Arial" ))
-		(text "levelDrawingRequest" (rect 21 299 104 311)(font "Arial" ))
-		(line (pt 0 304)(pt 16 304)(line_width 1))
-	)
-	(port
-		(pt 0 320)
-		(input)
-		(text "levelRGB[7..0]" (rect 0 0 59 12)(font "Arial" ))
-		(text "levelRGB[7..0]" (rect 21 315 80 327)(font "Arial" ))
-		(line (pt 0 320)(pt 16 320)(line_width 3))
-	)
-	(port
-		(pt 0 336)
-		(input)
-		(text "pig_checkDrawingRequest" (rect 0 0 106 12)(font "Arial" ))
-		(text "pig_checkDrawingRequest" (rect 21 331 127 343)(font "Arial" ))
-		(line (pt 0 336)(pt 16 336)(line_width 1))
-	)
-	(port
-		(pt 0 352)
-		(input)
-		(text "pigCheckRGB[7..0]" (rect 0 0 77 12)(font "Arial" ))
-		(text "pigCheckRGB[7..0]" (rect 21 347 98 359)(font "Arial" ))
-		(line (pt 0 352)(pt 16 352)(line_width 3))
-	)
-	(port
-		(pt 264 32)
+		(pt 256 32)
 		(output)
 		(text "RGBOut[7..0]" (rect 0 0 55 12)(font "Arial" ))
-		(text "RGBOut[7..0]" (rect 188 27 243 39)(font "Arial" ))
-		(line (pt 264 32)(pt 248 32)(line_width 3))
+		(text "RGBOut[7..0]" (rect 180 27 235 39)(font "Arial" ))
+		(line (pt 256 32)(pt 240 32)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 248 384)(line_width 1))
+		(rectangle (rect 16 16 240 320)(line_width 1))
 	)
 )

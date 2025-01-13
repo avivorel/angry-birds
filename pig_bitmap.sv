@@ -29,15 +29,6 @@ localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// RGB value in the bitmap 
 
 
 logic [0:15] [0:15] [3:0]  MazeBitMapMask ;  
-logic [0:15] [0:15] [3:0]  MazeBitMapMask_lev1;
-logic [0:15] [0:15] [3:0]  MazeBitMapMask_lev2;
-logic [0:15] [0:15] [3:0]  MazeBitMapMask_lev3;
-logic [0:15] [0:15] [3:0]  MazeBitMapMask_lev4;
-
-
-
-
-
 
 logic [0:15] [0:15] [3:0]  MazeDefaultBitMapMask= // defult table to load on reset 
 {{64'h000000000000000000},
@@ -64,11 +55,11 @@ logic [0:15] [0:15] [3:0]  MazeBitMapMask_level1= // defult table to load on res
  {64'h000000000000000000},
  {64'h000000000000000000},
  {64'h000000000000000000},
- {64'h000000000000001000},
  {64'h000000000000000000},
  {64'h000000000000000000},
  {64'h000000000000000000},
  {64'h000000000000000000},
+ {64'h000000001000010000},
  {64'h000000000000000000},
  {64'h000000000000000000},
  {64'h000000000000000000},
@@ -85,9 +76,9 @@ logic [0:15] [0:15] [3:0]  MazeBitMapMask_level2= // defult table to load on res
  {64'h000000000000000000},
  {64'h000000000000000000},
  {64'h000000000000000000},
- {64'h000000000000001000},
  {64'h000000000000000000},
  {64'h000000000000000000},
+ {64'h000000001000010000},
  {64'h000000000000000000},
  {64'h000000000000000000},
  {64'h000000000000000000},
@@ -97,26 +88,8 @@ logic [0:15] [0:15] [3:0]  MazeBitMapMask_level2= // defult table to load on res
 
 logic [0:15] [0:15] [3:0]  MazeBitMapMask_level3= // defult table to load on reset 
 {{64'h000000000000000000},
- {64'h000000000000000000},
- {64'h000000000000000000},
- {64'h000000000000000000},
- {64'h000000000000000000},
- {64'h000000000000000000},
- {64'h000000000000000000},
- {64'h000000001000000000},
- {64'h000000000000000000},
- {64'h000000000000000000},
- {64'h000000000000000000},
- {64'h000000000000000000},
- {64'h000000000000000000},
- {64'h000000000000000000},
- {64'h000000000000000000},
- {64'h000000000000000000}};
- 
- logic [0:15] [0:15] [3:0]  MazeBitMapMask_level4= // defult table to load on reset 
-{{64'h000000000000000000},
- {64'h000000000000000000},
  {64'h000000000001110000},
+ {64'h000000000000000000},
  {64'h000000000000000000},
  {64'h000000000000000000},
  {64'h000000000000000000},
@@ -208,106 +181,24 @@ logic [0:15] [0:15] [3:0]  MazeBitMapMask_level3= // defult table to load on res
 // assign offsetX_LSB  = offsetX[4:0] ; 
 // assign offsetX_MSB  = offsetX[8:5] ; 
 
-// pipeline (ff) to get the pixel color from the array 
-logic [3:0] current_level; 	 
-logic [0:15][0:15][3:0] MazeBitMapMask_next; // Temporary signal
+// pipeline (ff) to get the pixel color from the array 	 
 
 //==----------------------------------------------------------------------------------------------------------------=
 always_ff@(posedge clk or negedge resetN)
 begin
 	if(!resetN) begin
 		RGBout <=	8'h00;
-		MazeBitMapMask  <=  MazeDefaultBitMapMask ;
-		MazeBitMapMask_lev1<=  MazeBitMapMask_level1 ;
-		MazeBitMapMask_lev2<=  MazeBitMapMask_level2 ;
-		MazeBitMapMask_lev3<=  MazeBitMapMask_level3 ;
-		MazeBitMapMask_lev4<=  MazeBitMapMask_level4 ;
+		MazeBitMapMask  <=  MazeBitMapMask_level2 ;  //  copy default tabel 
 	end
 	else begin
 		RGBout <= TRANSPARENT_ENCODING ; // default 
 //----------------------------------add collision betwenn smiley and Hart -- disappear Hart  ------------------------------------------		
-             //if (pig_collision == 1'b1)
-					//MazeBitMapMask[offsetY[8:5]][offsetX[8:5]] <= 4'h0;
-				 
+             if (pig_collision == 1'b1)
+						MazeBitMapMask[offsetY[8:5]][offsetX[8:5]] <= 4'h0;
 		
 //------------------------------------End collision betwenn smiley and Hart-------------------------------------------- 		
-		if(level == 4'h0)
-		begin
-			if (pig_collision == 1'b1)
-				MazeBitMapMask[offsetY[8:5]][offsetX[8:5]] <= 4'h0;
-					
-			if (InsideRectangle == 1'b1 )	
-				begin 
-					case (MazeBitMapMask[offsetY[8:5]][offsetX[8:5]])
-						4'h0 : RGBout <= TRANSPARENT_ENCODING ;
-						4'h1 : RGBout <= object_colors[2'h0][offsetY[4:0]][offsetX[4:0]]; 
-						4'h2 : RGBout <= object_colors[2'h1][offsetY[4:0]][offsetX[4:0]] ; 
-						default:  RGBout <= TRANSPARENT_ENCODING ; 
-					endcase
-			end 
-		end
 		
-		else if(level == 4'h1)
-		begin
-			if (pig_collision == 1'b1)
-				MazeBitMapMask_lev1[offsetY[8:5]][offsetX[8:5]] <= 4'h0;
-			if (InsideRectangle == 1'b1 )	
-				begin 
-					case (MazeBitMapMask_lev1[offsetY[8:5]][offsetX[8:5]])
-						4'h0 : RGBout <= TRANSPARENT_ENCODING ;
-						4'h1 : RGBout <= object_colors[2'h0][offsetY[4:0]][offsetX[4:0]]; 
-						4'h2 : RGBout <= object_colors[2'h1][offsetY[4:0]][offsetX[4:0]] ; 
-						default:  RGBout <= TRANSPARENT_ENCODING ; 
-					endcase
-			end
-		end
-		
-		else if(level == 4'h2)
-		begin
-			if (pig_collision == 1'b1)
-				MazeBitMapMask_lev2[offsetY[8:5]][offsetX[8:5]] <= 4'h0;
-			if (InsideRectangle == 1'b1 )	
-				begin 
-					case (MazeBitMapMask_lev2[offsetY[8:5]][offsetX[8:5]])
-						4'h0 : RGBout <= TRANSPARENT_ENCODING ;
-						4'h1 : RGBout <= object_colors[2'h0][offsetY[4:0]][offsetX[4:0]]; 
-						4'h2 : RGBout <= object_colors[2'h1][offsetY[4:0]][offsetX[4:0]] ; 
-						default:  RGBout <= TRANSPARENT_ENCODING ; 
-					endcase
-			end
-		end
-		
-		else if(level == 4'h3)
-		begin
-			if (pig_collision == 1'b1)
-				MazeBitMapMask_lev3[offsetY[8:5]][offsetX[8:5]] <= 4'h0;
-			if (InsideRectangle == 1'b1 )	
-				begin 
-					case (MazeBitMapMask_lev3[offsetY[8:5]][offsetX[8:5]])
-						4'h0 : RGBout <= TRANSPARENT_ENCODING ;
-						4'h1 : RGBout <= object_colors[2'h0][offsetY[4:0]][offsetX[4:0]]; 
-						4'h2 : RGBout <= object_colors[2'h1][offsetY[4:0]][offsetX[4:0]] ; 
-						default:  RGBout <= TRANSPARENT_ENCODING ; 
-					endcase
-			end
-		end
-		
-		else if(level == 4'h4)
-		begin
-			if (pig_collision == 1'b1)
-				MazeBitMapMask_lev3[offsetY[8:5]][offsetX[8:5]] <= 4'h0;
-			if (InsideRectangle == 1'b1 )	
-				begin 
-					case (MazeBitMapMask_lev4[offsetY[8:5]][offsetX[8:5]])
-						4'h0 : RGBout <= TRANSPARENT_ENCODING ;
-						4'h1 : RGBout <= object_colors[2'h0][offsetY[4:0]][offsetX[4:0]]; 
-						4'h2 : RGBout <= object_colors[2'h1][offsetY[4:0]][offsetX[4:0]] ; 
-						default:  RGBout <= TRANSPARENT_ENCODING ; 
-					endcase
-			end
-		end
-		
-		else 
+		if (InsideRectangle == 1'b1 )	
 			begin 
 		   	case (MazeBitMapMask[offsetY[8:5]][offsetX[8:5]])
 					 4'h0 : RGBout <= TRANSPARENT_ENCODING ;
@@ -318,32 +209,23 @@ begin
 			end 
  
 	end
-	
-	
-end
+	if (!resetN) begin
+        pigs_left <= 1'b1; 
+    end else begin
+        pigs_left <= 1'b0; 
+        for (int i = 0; i < 16; i++) begin
+            if (MazeBitMapMask_level2[0][i] != 0) begin
+                pigs_left <= 1'b1;
+                break; 
+            end
 
-// Logic to determine if any pigs are left
-always_comb begin
-	pigs_left = 1'b0;
-	for (int i = 0; i < 16; i++) begin
-		for (int j = 0; j < 16; j++) begin
-			for (int k = 0; k < 4; k++) begin
-				if ((level == 4'h0 && MazeBitMapMask[i][j][k] != 4'h0) ||
-				    (level == 4'h1 && MazeBitMapMask_lev1[i][j][k] != 4'h0) ||
-				    (level == 4'h2 && MazeBitMapMask_lev2[i][j][k] != 4'h0) ||
-				    (level == 4'h3 && MazeBitMapMask_lev3[i][j][k] != 4'h0) ||
-				    (level == 4'h4 && MazeBitMapMask_lev4[i][j][k] != 4'h0)) begin
-					pigs_left = 1'b1;
-				end
-			end
-		end
-	end
+        end
+		  pigs_left <= 1'b0;
+    end
+	
 end
 
 //==----------------------------------------------------------------------------------------------------------------=
 // decide if to draw the pixel or not 
 assign drawingRequest = (RGBout != TRANSPARENT_ENCODING ) ? 1'b1 : 1'b0 ; // get optional transparent command from the bitmpap   
 endmodule
-
-
-

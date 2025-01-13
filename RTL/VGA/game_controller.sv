@@ -92,7 +92,7 @@ logic collision_smiley_number; // collision between Smiley and number - is not o
 
 
 //
-logic num_of_levels = 4'd2;
+logic num_of_levels = 4'd3;
 
 always_ff@(posedge clk or negedge resetN)
 begin
@@ -135,11 +135,8 @@ begin
 		game_over <= 1'b0;
 	end 
 	else begin
-		if(current_level >= num_of_levels)begin
-			game_over <= 1'b1;
-		end
-		else if(pigs_left == 1'b0)begin
-			current_level<=current_level+1;
+		if(pigs_left == 1'b0)begin
+			current_level++;
 		end
 	end
 

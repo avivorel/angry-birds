@@ -788,105 +788,6 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect -1072 648 -728 760)
-	(text "lpm_rom" (rect 5 0 47 12)(font "Arial" ))
-	(text "inst5" (rect 8 96 30 113)(font "Intel Clear" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "address[(LPM_WIDTHAD) - (1)..0]" (rect 0 0 168 12)(font "Arial" ))
-		(text "address[(LPM_WIDTHAD) - (1)..0]" (rect 21 27 189 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 3))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "inclock" (rect 0 0 34 12)(font "Arial" ))
-		(text "inclock" (rect 21 43 55 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "outclock" (rect 0 0 41 12)(font "Arial" ))
-		(text "outclock" (rect 21 59 62 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "memenab" (rect 0 0 48 12)(font "Arial" ))
-		(text "memenab" (rect 21 75 69 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80))
-	)
-	(port
-		(pt 344 32)
-		(output)
-		(text "q[(LPM_WIDTH) - (1)..0]" (rect 0 0 120 12)(font "Arial" ))
-		(text "q[(LPM_WIDTH) - (1)..0]" (rect 222 27 342 39)(font "Arial" ))
-		(line (pt 344 32)(pt 328 32)(line_width 3))
-	)
-	(parameter
-		"LPM_WIDTH"
-		"8"
-		""
-	)
-	(parameter
-		"LPM_WIDTHAD"
-		"19"
-		""
-	)
-	(parameter
-		"LPM_NUMWORDS"
-		"307200"
-		""
-	)
-	(parameter
-		"LPM_ADDRESS_CONTROL"
-		"REGISTERED"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"LPM_OUTDATA"
-		"UNREGISTERED"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"LPM_FILE"
-		"RTL/background.mif"
-		""
-	)
-	(parameter
-		"DEVICE_FAMILY"
-		""
-		""
-	)
-	(parameter
-		"AUTO_CARRY_CHAINS"
-		"ON"
-		""
-	)
-	(parameter
-		"IGNORE_CARRY_BUFFERS"
-		"OFF"
-		""
-	)
-	(parameter
-		"AUTO_CASCADE_CHAINS"
-		"ON"
-		""
-	)
-	(parameter
-		"IGNORE_CASCADE_BUFFERS"
-		"OFF"
-		""
-	)
-	(drawing
-		(rectangle (rect 16 16 328 96))
-	)
-	(annotation_block (parameter)(rect -1040 400 -739 628))
-)
-(symbol
 	(rect -16 1392 208 1536)
 	(text "square_object" (rect 5 0 73 12)(font "Arial" ))
 	(text "inst13" (rect 8 128 36 145)(font "Intel Clear" ))
@@ -1821,6 +1722,105 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 216 112))
 	)
+)
+(symbol
+	(rect -1072 648 -728 760)
+	(text "lpm_rom" (rect 5 0 47 12)(font "Arial" ))
+	(text "inst5" (rect 8 96 30 113)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "address[(LPM_WIDTHAD) - (1)..0]" (rect 0 0 168 12)(font "Arial" ))
+		(text "address[(LPM_WIDTHAD) - (1)..0]" (rect 21 27 189 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "inclock" (rect 0 0 34 12)(font "Arial" ))
+		(text "inclock" (rect 21 43 55 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "outclock" (rect 0 0 41 12)(font "Arial" ))
+		(text "outclock" (rect 21 59 62 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "memenab" (rect 0 0 48 12)(font "Arial" ))
+		(text "memenab" (rect 21 75 69 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 344 32)
+		(output)
+		(text "q[(LPM_WIDTH) - (1)..0]" (rect 0 0 120 12)(font "Arial" ))
+		(text "q[(LPM_WIDTH) - (1)..0]" (rect 222 27 342 39)(font "Arial" ))
+		(line (pt 344 32)(pt 328 32)(line_width 3))
+	)
+	(parameter
+		"LPM_WIDTH"
+		"8"
+		""
+	)
+	(parameter
+		"LPM_WIDTHAD"
+		"19"
+		""
+	)
+	(parameter
+		"LPM_NUMWORDS"
+		"307200"
+		""
+	)
+	(parameter
+		"LPM_ADDRESS_CONTROL"
+		"REGISTERED"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"LPM_OUTDATA"
+		"UNREGISTERED"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"LPM_FILE"
+		"RTL/output-onlinepngtoolsBitMap.mif"
+		""
+	)
+	(parameter
+		"DEVICE_FAMILY"
+		""
+		""
+	)
+	(parameter
+		"AUTO_CARRY_CHAINS"
+		"ON"
+		""
+	)
+	(parameter
+		"IGNORE_CARRY_BUFFERS"
+		"OFF"
+		""
+	)
+	(parameter
+		"AUTO_CASCADE_CHAINS"
+		"ON"
+		""
+	)
+	(parameter
+		"IGNORE_CASCADE_BUFFERS"
+		"OFF"
+		""
+	)
+	(drawing
+		(rectangle (rect 16 16 328 96))
+	)
+	(annotation_block (parameter)(rect -1040 400 -646 628))
 )
 (connector
 	(text "resetN" (rect -134 176 -104 193)(font "Intel Clear" ))

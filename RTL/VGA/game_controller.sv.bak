@@ -11,7 +11,6 @@ module	game_controller	(
 			input	logic	drawing_request_smiley,
 			input	logic	drawing_request_boarders,
 			
-			
 //---------------------#1-add input drawing request of box/number
 			input	logic	drawing_request_number,
 
@@ -26,9 +25,6 @@ module	game_controller	(
 //---------------------#2-add  drawing request of hart
 
 			input	logic	drawing_request_hart,
-			input	logic	drawing_request_wood_blocks,
-			input	logic	drawing_request_pig,
-			input	logic	pigs_left,
 
 //---------------------#2-end drawing request of hart		
 
@@ -42,13 +38,12 @@ module	game_controller	(
 //---------------------#3-add collision  smiley and hart   -------------------------------------
 
 
-			output logic collision_Smiley_Hart, // active in case of collision between Smiley and hart
-			output logic collision_bird_woodBlock,
-			output logic collision_bird_pig,
+			output logic collision_Smiley_Hart // active in case of collision between Smiley and hart
+
 
 //---------------------#3-end collision  smiley and hart	--------------------------------------
-			output logic	[3:0] current_level,
-			output logic game_over
+			
+
 
 );
 
@@ -69,7 +64,7 @@ module	game_controller	(
 
 //---------------------#5-update  collision  sconditions - add collision between smiley and hart  ---------------------------------
 
-assign collision = collision_smiley_number || (drawing_request_boarders && drawing_request_smiley) || ( drawing_request_smiley && drawing_request_hart )||(collision_bird_woodBlock); 
+assign collision = collision_smiley_number || (drawing_request_boarders && drawing_request_smiley) || ( drawing_request_smiley && drawing_request_hart ); 
 	
 
 
@@ -91,9 +86,6 @@ logic flag ; // a semaphore to set the output only once per frame regardless of 
 logic collision_smiley_number; // collision between Smiley and number - is not output
 
 
-//
-logic num_of_levels = 4'd2;
-
 always_ff@(posedge clk or negedge resetN)
 begin
 	if(!resetN)
@@ -107,8 +99,6 @@ begin
 //-------------------------- #7-add colision between Smiley and number-----------------
 
 collision_smiley_number <= drawing_request_smiley && drawing_request_number;
-collision_bird_woodBlock <= drawing_request_smiley && drawing_request_wood_blocks;
-collision_bird_pig <= drawing_request_smiley && drawing_request_pig;
 
 //-------------------------- #7-end colision between Smiley and number-----------------	
 		
@@ -119,30 +109,12 @@ collision_bird_pig <= drawing_request_smiley && drawing_request_pig;
 				
 //	---#7 - change the condition below to collision between Smiley and number ---------
 
-		if ( collision  && (flag == 1'b0)) begin 
+if ( collision  && (flag == 1'b0)) begin 
 			flag	<= 1'b1; // to enter only once 
 			SingleHitPulse <= 1'b1 ; 
 		end ; 
  
 	end 
-end
-
-always_ff@(posedge clk or negedge resetN)
-begin
-	if(!resetN)
-	begin 
-		current_level <=4'd0;
-		game_over <= 1'b0;
-	end 
-	else begin
-		if(current_level >= num_of_levels)begin
-			game_over <= 1'b1;
-		end
-		else if(pigs_left == 1'b0)begin
-			current_level<=current_level+1;
-		end
-	end
-
 end
 
 endmodule

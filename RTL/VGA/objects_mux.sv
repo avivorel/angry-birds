@@ -34,6 +34,9 @@ module	objects_mux	(
 		
 					input    logic woodDrawingRequest, // box of numbers **TEST
 					input		logic	[7:0] woodRGB,
+					
+					input    logic pigDrawingRequest, // box of numbers **TEST
+					input		logic	[7:0] pigRGB,
 		  
 		  
 				   output	logic	[7:0] RGBOut
@@ -52,6 +55,8 @@ begin
 		 // add logic for box here 
 		 
 //--------------------------------------------------------------------------------------------		
+		else if (pigDrawingRequest == 1'b1 )
+			RGBOut <= pigRGB;
 		else if (woodDrawingRequest == 1'b1 )
 			RGBOut <= woodRGB;
 		else if (boxDrawingRequest == 1'b1 )
